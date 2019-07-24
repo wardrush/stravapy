@@ -1,0 +1,60 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Jul 24 14:53:42 2019
+
+@author: wrush049
+"""
+Object Representations:
+Three levels of increasing detail
+1. Meta - Includes the ID, possibly name, possibly resource_state (1-meta, 2-summary, 3-detailed)
+2. Summary - Includes more details
+3. Detailed - Includes all details allowed by scope
+
+Functions
+
+PUT
+Activity: Update Activity
+Athlete: Update Athlete
+Segment: Star Segment
+
+GET
+Activity: Get Activity
+Activity: List Activity Comments
+Activity: List Activity Kudoers
+Activity: List Activity Laps
+Activity: List Athlete Activities
+Activity: Get Activity Zones
+Athlete: Get Authenticated Athlete
+Athlete: Get Zones
+Athlete: Get Athlete Stats
+Club: List Club Activities
+Club: List Club Administrators
+Club: Get Club
+Club: List Club Members
+Club: List Athlete Clubs
+Gear: Get Equipment
+Route: Export Route GPX
+Route: Export Route TCX
+Route: Get Route
+RunningRace: Get Running Race
+RunningRace: List Running Races
+SegmentEffort: List Segment Efforts
+SegmentEffort: Get Segment Effort
+Segment: Explore Segments
+Segment: Get Segment Leaderboard
+Segment: List Starred Segment
+Segment: Get Segment
+Streams: Get Activity Streams
+Streams: Get Route Streams
+Streams: Get Segment Effort Streams
+Streams: Get Segment Streams
+Upload: Get Upload
+
+POST
+Activity: Create an Activity
+Upload: Upload Activity
+ 
+DELETE
+
+
+Models
