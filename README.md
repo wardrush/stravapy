@@ -15,3 +15,6 @@ The Strava authentication process generally works as follows:
 1. Register with Strava for API access at https://www.strava.com/settings/api
 2. Record your Client ID and Client Secret. Make sure that if you're uploading to github, you do not leave these in plaintext
 4. TODO figure out exactly what this workflow is going to look like
+
+## Project Structure
+Strava is using effectively abstract base classes in the form of meta classes. Meta athletes and activities will be replaced with simply their ids
