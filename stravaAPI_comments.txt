@@ -1,0 +1,4 @@
+1. In Get Activity Streams, the keys parameter does not list the values that it can accept.
+2. In Lap model, max_speed has a typo in the description. Lat should be lap
+3. In Lap model, split's description, "an instance of integer", is not a useful descriptor
+4. In PhotosSummary_primary, none of the descriptions are effective at communicating ideas

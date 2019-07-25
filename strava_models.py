@@ -16,18 +16,20 @@ class ActivityStats:
     Set of stats and totals for an athlete
     Subclassed by Athlete
     """
-    
-    def __init__(self, 
-                 biggest_ride_distance=None, 
-                 biggest_climb_elevation_gain=None, 
-                 recent_ride_totals=None, 
-                 recent_run_totals=None, 
-                 recent_swim_totals=None, 
-                 ytd_ride_totals=None, 
-                 ytd_run_totals=None, 
-                 ytd_swim_totals=None, 
-                 all_ride_totals=None, 
-                 all_swim_totals=None):
+
+    def __init__(
+        self,
+        biggest_ride_distance=None,
+        biggest_climb_elevation_gain=None,
+        recent_ride_totals=None,
+        recent_run_totals=None,
+        recent_swim_totals=None,
+        ytd_ride_totals=None,
+        ytd_run_totals=None,
+        ytd_swim_totals=None,
+        all_ride_totals=None,
+        all_swim_totals=None,
+    ):
         """
         Instantiate an ActivityStats object
         
@@ -71,14 +73,16 @@ class ActivityTotals:
     A roll-up of metric pertaining to a set of activities. 
     Values are in seconds and meters
     """
-    
-    def __init__(self, 
-                 count=None,
-                distance=None,
-                moving_time=None,
-                elapsed_time=None,
-                elevation_gain=None,
-                achievement_count=None):
+
+    def __init__(
+        self,
+        count=None,
+        distance=None,
+        moving_time=None,
+        elapsed_time=None,
+        elevation_gain=None,
+        achievement_count=None,
+    ):
         """
         Instatiates an ActivityTotals object
     
@@ -101,8 +105,8 @@ class ActivityTotals:
         :type achievement_count:
         """
 
-
         pass
+
 
 # TODO decide if this should just be made as an attr in activity class
 class ActivityTypes:
@@ -125,15 +129,17 @@ class ActivityZone:
     """
     A description of the heartrate or power zone distributions for an activity
     """
-    
-    def __init__(self, 
-                 score=None, 
-                 distribution_buckets=None, 
-                 zone_type=None, 
-                 sensor_based=None, 
-                 points=None, 
-                 custom_zones=None, 
-                 zone_max=None):
+
+    def __init__(
+        self,
+        score=None,
+        distribution_buckets=None,
+        zone_type=None,
+        sensor_based=None,
+        points=None,
+        custom_zones=None,
+        zone_max=None,
+    ):
         """
         
         :param score: #TODO not sure what this score is
@@ -159,44 +165,24 @@ class ActivityZone:
         :type zone_max: int
         """
         pass
-    
 
-class BaseStream:
-    """
-    The parent class for Streams.
-    Describes attributes about Stream such as size, resolution, and type
-    """
-    
-    def __init__(self, 
-                 original_size=None, 
-                 resolution=None, 
-                 series_type=None):
-        """
-        :param original_size: The number of data points in the stream
-        :type original_size: int
-            
-        :param resolution: Level of detail (sampling) for the stream. 
-                            May be of types: [low, medium, high]
-        :type resolution: string
-            
-        :param series_type: Base series used in case stream was downsampled.
-                            May be of type: [distance, time]
-        :type series_type: string
-        """
-        pass
+
+
 
 
 class Comment:
     """
     A record of the data and content in an activity comment
     """
-    
-    def __init__(self, 
-                 comment_id=None,
-                 activity_id=None,
-                 text=None,
-                 athlete=None,
-                 created_at=None):
+
+    def __init__(
+        self,
+        comment_id=None,
+        activity_id=None,
+        text=None,
+        athlete=None,
+        created_at=None,
+    ):
         """
         :param comment_id: Unique identifier for comment. Variable name changed
                             from Strava's id to avoid keyword conflicts
@@ -221,11 +207,8 @@ class Error:
     """
     The error returned by Strava's API
     """
-    
-    def __init__(self, 
-                 code=None, 
-                 field=None, 
-                 resource=None):
+
+    def __init__(self, code=None, field=None, resource=None):
         """
         :param code: The code thrown by the error
         :type code: string
@@ -244,9 +227,8 @@ class ExplorerResponse:
     A specific class used for segment searching results
     Takes attr of class ExplorerSegment
     """
-    
-    def __init__(self, 
-                 segments=None):
+
+    def __init__(self, segments=None):
         """
         :param segments: The set of segments matching an explorer request:
         :type segments: Instance of ExplorerSegment
@@ -258,7 +240,7 @@ class ExplorerSegment:
     """
     A segment and associated information along with the stretch of route
     """
-    
+
     def __init__(self):
         """
         :param segment_id: Unique idenfier for the segment
@@ -303,10 +285,8 @@ class Fault:
     """
     Encapsulates the Errors returned from API
     """
-    
-    def __init__(self, 
-                 errors=None, 
-                 message=None):
+
+    def __init__(self, errors=None, message=None):
         """
         :param errors: Set of errrs assocaited with fault (if any)
         :type errors: Instance of Error
@@ -321,10 +301,8 @@ class HeartRateZoneRanges:
     """
     The training heart rate zones for the user. Can be calculated or manually entered
     """
-    
-    def __init__(self, 
-                 custom_zones=None, 
-                 zones=None):
+
+    def __init__(self, custom_zones=None, zones=None):
         """
         :param custom_zones: Whether the athlete has set custom zones
         :type custom_zones: bool
@@ -333,98 +311,229 @@ class HeartRateZoneRanges:
         :type zones: Instance of ZoneRanges
         """
         pass
-    
+
 
 class Lap:
     """
     If performing an activity where more than one repetition of the same route 
     is traversed, each will be calculated as a separate lap
     """
-    
+
     def __init__(self,
-                 ):
+                 lap_id=None, 
+                 activity=None, 
+                 athlete=None, 
+                 average_cadence=None, 
+                 average_speed=None,
+                 distance=None, 
+                 elapsed_time=None, 
+                 start_index=None, 
+                 end_index=None, 
+                 lap_index=None, 
+                 max_speed=None, 
+                 moving_time=None, 
+                 name=None, 
+                 pace_zone=None, 
+                 split=None, 
+                 start_data=None, 
+                 start_date_local=None, 
+                 total_elevation_gain=None):
         """
         :param lap_id: Unique identifier of lap. Variable name changed from 
                         Strava's id to avoid keyword conflicts
         :type lap_id: float
         
-        :param activity: 
-        :type activity:
+        :param activity: Originally an instance of MetaActivity, but that class 
+                            is just the activity id (type float) so this type
+                            will accept either float or MetaActivity
+        :type activity: float or MetaActivity
         
-        :param athlete:
-        :type athlete:
+        :param athlete: Originally an instance of MetaAthlete, but that class 
+                            is just the activity id (type float) so this type
+                            will accept either float or MetaAthlete
+        :type athlete: float or MetaAthlete
         
-        :param average_cadence:
-        :type average_cadence:
+        :param average_cadence: The lap's average cadence
+        :type average_cadence: float
         
-        :param average_speed:
-        :type average_speed:
+        :param average_speed: The lap's average speed
+        :type average_speed: float
         
-        :param distance:
-        :type distance:
+        :param distance: the lap's distance in meters
+        :type distance: float
         
-        :param elapsed_time:
-        :type elapsed_time:
+        :param elapsed_time: The lap's elapsed time in seconds
+        :type elapsed_time: float
         
-        :param start_index:
-        :type start_index:
+        :param start_index: The index of the start in the assocaited ActivityStream
+        :type start_index: int
         
-        :param end_index:
-        :type end_index:
+        :param end_index: The index of the end in the associated ActivityStream
+        :type end_index: int
         
-        :param lap_index:
-        :type lap_index:
+        :param lap_index: The index of the lap in the overall activity.
+                            (e.g. if its the 3rd lap of 5, 3)
+        :type lap_index: int
         
-        :param max_speed:
-        :type max_speed:
+        :param max_speed: Maximum speed in the lap in meters per second
+        :type max_speed: float
         
-        :param moving_time:
-        :type moving_time:
+        :param moving_time: The lap's moving time in seconds
+        :type moving_time: int #TODO check if this is correct
         
-        :param name:
-        :type name:
+        :param name: The name of the lap
+        :type name: string
         
-        :param pace_zone:
-        :type pace_zone:
+        :param pace_zone: The athlete's pace zone during the lap
+        :type pace_zone: int
         
-        :param split:
-        :type split:
+        :param split: #TODO check this
+        :type split: int 
         
-        :param start_date:
-        :type start_date:
+        :param start_date: The time at which the lap was started
+        :type start_date: DateTime
         
-        :param start_date_local:
-        :type start_date_local:
+        :param start_date_local: Time at which lap was started in local time
+        :type start_date_local: DateTime
         
-        :param total_elevation_gain:
-        :type total_elevation_gain:
+        :param total_elevation_gain: The elevation gain of the lap in meters
+        :type total_elevation_gain: float
         """
-    pass
+
+        pass
 
 
 class LatLng:
-    pass
+    """
+    A collection of latitude and logitude coordinates (floats)
+    """
+    
+    def __init__(self, 
+                 lat=None, 
+                 long=None):
+        """
+        Initialize the object's coordinates
+        """
+        self.lat = lat
+        self.long = long
+        
+    def __repr__(self):
+        """
+        Create the representation of this class when called.
+        When asked to return, will be returned as [lat, long]
+        """
+        return [self.lat, self.long]
 
 
 class MetaActivity:
-    pass
+    """
+    The lowest detail level for an activity. Contains only the id
+    """
+    
+    def __init__(self, activity_id=None):
+        """
+        :param activity_id: Unique identifier. Renamed from Strava's API to 
+                            avoid keyword collisions.
+        :type activity_id: float
+        """
+        self.activity_id = activity_id
+        
+    def __repr__(self):
+        return self.activity_id
+    
+    def __str__(self):
+        return f"MetaActivity with ID: {self.activity_id}"
+
 
 
 class MetaAthlete:
-    pass
+    """
+    The lowest detail level for an athlete. Contains only the id
+    """
+    
+    def __init__(self, athlete_id=None):
+        """
+        :param athlete_id: Unique identifier. Renamed from Strava's API to 
+                            avoid keyword collisions.
+        :type athlete_id: float
+        """
+        self.athlete_id = athlete_id
+        
+    def __repr__(self):
+        return self.activity_id
+    
+    def __str__(self):
+        return f"MetaAthlete with ID: {self.athlete_id}"
+
 
 
 class MetaClub:
-    pass
-
-
-class PhotosSummary:
-    pass
+    """
+    The lowest detail level for a club. Contains id, resource_state, and name
+    """
+    
+    def __init__(self, 
+                 club_id=None,
+                 resource_state=None, 
+                 name=None):
+        """
+        :param club_id: Unique identifier. Renamed from Strava's API to avoid
+                        keyword collisions.
+        :type club_id: int
+        
+        :param resource_state: Indicates level of detail. Will always be 1 in
+                                Meta classes
+        :type resource_state: int
+        
+        :param name: The club's name
+        :type name: string
+        """
+        self.club_id = club_id
+        self.resource_state = resource_state
+        self.name = name
+        
+    def __repr__(self):
+        return self.club_id
+    
+    def __str__(self):
+        return f"MetaClub with ID: {self.club_id} and name: {self.name}"
 
 
 class PhotosSummary_primary:
+    """
+    Parent class of PhotosSummary
+    """
+    
+    def __init__(self, photos_summary_id=None, source=None, unique_id=None, urls=None):
+        """
+        :param photos_summary_id:
+        :type photos_summary_id:
+        
+        :param source:
+        :type source:
+        
+        :param unique_id:
+        :type unique_id:
+        
+        :param urls:
+        :type urls:
+        """
     pass
 
+class PhotosSummary(PhotosSummary_primary):
+    """
+    Subclass of PhotosSummary_primary. On its own only has # of photos as attr
+    """
+    def __init__(self, count=None, primary=None):
+        """
+        :param count: The number of photos
+        :type count: int
+        
+        :param primary: An instance of PhotosSummary_primary
+        :type primary: Instance of PhotosSummary_primary
+        """
+        self.count = count
+        self.primary = primary
 
 class PolylineMap:
     pass
@@ -501,6 +610,27 @@ class Zones:
 ############
 # Stream models
 ###########
+
+class BaseStream:
+    """
+    The parent class for Streams.
+    Describes attributes about Stream such as size, resolution, and type
+    """
+
+    def __init__(self, original_size=None, resolution=None, series_type=None):
+        """
+        :param original_size: The number of data points in the stream
+        :type original_size: int
+            
+        :param resolution: Level of detail (sampling) for the stream. 
+                            May be of types: [low, medium, high]
+        :type resolution: string
+            
+        :param series_type: Base series used in case stream was downsampled.
+                            May be of type: [distance, time]
+        :type series_type: string
+        """
+        pass
 
 
 class AltitudeStream:
