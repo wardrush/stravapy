@@ -18,25 +18,25 @@ The Strava authentication process generally works as follows:
 
 ## Project Structure
 ```
-project
+stravapy
 │   README.md
-|   oauth2_utils.py
-|   strava_models.py
 |   Strava API Functions and Models.txt
 |   stravaAPI_comments.txt
 │
 └───models
-│   │   activity.py
-│   │   athlete.py
-|   |   stream.py
-|   |   utils.py
-│   │
-│   └───subfolder1
-│       │   file111.txt
-│       │   file112.txt
-│       │   ...
+│      activity.py
+│      athlete.py
+|      club.py
+|      gear.py
+|      segment.py
+|      stream.py
+|      utils.py
+│      zone.py
 │   
-└───folder2
-    │   file021.txt
-    │   file022.txt
+└───oauth
+    |   utils.py
+    │  
+    |___templates
+           success.html
+           fail.html
 ```
