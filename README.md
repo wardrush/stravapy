@@ -17,4 +17,3 @@ The Strava authentication process generally works as follows:
 4. TODO figure out exactly what this workflow is going to look like
 
 ## Project Structure
-Strava is using effectively abstract base classes in the form of meta classes. Meta athletes and activities will be replaced with simply their ids
