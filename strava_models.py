@@ -28,6 +28,7 @@ class ActivityStats:
         ytd_run_totals=None,
         ytd_swim_totals=None,
         all_ride_totals=None,
+        all_run_totals=None,
         all_swim_totals=None,
     ):
         """
@@ -59,13 +60,25 @@ class ActivityStats:
             
         :param all_ride_totals:
         :type all_ride_totals:
+
+        :param all_run_totals:
+        :type all_run_totals:
             
         :param all_swim_totals:
         :type all_swim_totals:
         
         """
-
-        pass
+        self.biggest_ride_distance = biggest_ride_distance
+        self.biggest_climb_elevation_gain = biggest_climb_elevation_gain
+        self.recent_ride_totals = recent_ride_totals
+        self.recent_run_totals = recent_run_totals
+        self.recent_swim_totals = recent_swim_totals
+        self.ytd_ride_totals = ytd_ride_totals
+        self.ytd_run_totals = ytd_run_totals
+        self.ytd_swim_totals = ytd_swim_totals
+        self.all_ride_totals = all_ride_totals
+        self.all_run_totals = all_run_totals
+        self.all_swim_totals = all_swim_totals
 
 
 class ActivityTotals:
@@ -104,8 +117,12 @@ class ActivityTotals:
         :param achievement_count:
         :type achievement_count:
         """
-
-        pass
+        self.count = count
+        self.distance = distance
+        self.moving_time = moving_time
+        self.elapsed_time = elapsed_time
+        self.elevation_gain = elevation_gain
+        self.achievement_count = achievement_count
 
 
 # TODO decide if this should just be made as an attr in activity class
@@ -164,7 +181,13 @@ class ActivityZone:
         :param zone_max: #TODO I think this is an int representing the max zone reached in activity
         :type zone_max: int
         """
-        pass
+        self.score = score
+        self.distribution_buckets = distribution_buckets
+        self.zone_type = zone_type
+        self.sensor_based = sensor_based
+        self.points = points
+        self.custom_zones = custom_zones
+        self.zone_max = zone_max
 
 
 
@@ -200,7 +223,11 @@ class Comment:
         :param created_at: The time at which comment was created. Using format ISO 8601
         :type created_at: DateTime
         """
-        pass
+        self.comment_id = comment_id
+        self.activity_id = activity_id
+        self.text = text
+        self.athlete = athlete
+        self.created_at = created_at
 
 
 class Error:
@@ -219,7 +246,9 @@ class Error:
         :param resource: the resource assocaited with the error
         :type resource: string
         """
-        pass
+        self.code = code
+        self.field = field
+        self.resource = resource
 
 
 class ExplorerResponse:
@@ -233,7 +262,7 @@ class ExplorerResponse:
         :param segments: The set of segments matching an explorer request:
         :type segments: Instance of ExplorerSegment
         """
-        pass
+        self.segments = segments
 
 
 class ExplorerSegment:
@@ -241,7 +270,17 @@ class ExplorerSegment:
     A segment and associated information along with the stretch of route
     """
 
-    def __init__(self):
+    def __init__(self,
+                 segment_id=None,
+                 name=None,
+                 climb_category=None,
+                 climb_category_desc=None,
+                 avg_grade=None,
+                 start_latlng=None,
+                 end_latlng=None,
+                 elev_difference=None,
+                 distance=None,
+                 points=None):
         """
         :param segment_id: Unique idenfier for the segment
         :type segment_id: float
@@ -277,8 +316,17 @@ class ExplorerSegment:
                         https://developers.google.com/maps/documentation/javascript/examples/polyline-simple
         :type points: string
         """
+        self.segment_id = segment_id
+        self.name = name
+        self.climb_category = climb_category
+        self.climb_category_desc = climb_category_desc
+        self.avg_grade = avg_grade
+        self.start_latlng = start_latlng
+        self.end_latlng = end_latlng
+        self.elev_difference = elev_difference
+        self.distance = distance
+        self.points = points
 
-        pass
 
 
 class Fault:
@@ -294,7 +342,8 @@ class Fault:
         :param message: Message of the fault
         :type message: string
         """
-        pass
+        self.errors = errors
+        self.message = message
 
 
 class HeartRateZoneRanges:
@@ -310,7 +359,8 @@ class HeartRateZoneRanges:
         :param zones: A collection of the maxes and mins of heartrate and power zones 
         :type zones: Instance of ZoneRanges
         """
-        pass
+        self.custom_zones = custom_zones
+        self.zones = zones
 
 
 class Lap:
@@ -335,7 +385,7 @@ class Lap:
                  name=None, 
                  pace_zone=None, 
                  split=None, 
-                 start_data=None, 
+                 start_date=None,
                  start_date_local=None, 
                  total_elevation_gain=None):
         """
@@ -399,58 +449,53 @@ class Lap:
         :param total_elevation_gain: The elevation gain of the lap in meters
         :type total_elevation_gain: float
         """
+        self.lap_id = lap_id
+        self.activity = activity
+        self.athlete = athlete
+        self.average_cadence = average_cadence
+        self.average_speed = average_speed
+        self.distance = distance
+        self.elapsed_time = elapsed_time
+        self.start_index = start_index
+        self.end_index = end_index
+        self.lap_index = lap_index
+        self.max_speed = max_speed
+        self.moving_time = moving_time
+        self.name = name
+        self.pace_zone = pace_zone
+        self.split = split
+        self.start_date = start_date
+        self.start_date_local = start_date_local
+        self.total_elevation_gain = total_elevation_gain
 
-        pass
 
-
-class LatLng:
-    """
-    A collection of latitude and logitude coordinates (floats)
-    """
-    
-    def __init__(self, 
-                 lat=None, 
-                 long=None):
-        """
-        Initialize the object's coordinates
-        """
-        self.lat = lat
-        self.long = long
-        
-    def __repr__(self):
-        """
-        Create the representation of this class when called.
-        When asked to return, will be returned as [lat, long]
-        """
-        return [self.lat, self.long]
 
 
 class MetaActivity:
     """
     The lowest detail level for an activity. Contains only the id
     """
-    
+
     def __init__(self, activity_id=None):
         """
-        :param activity_id: Unique identifier. Renamed from Strava's API to 
+        :param activity_id: Unique identifier. Renamed from Strava's API to
                             avoid keyword collisions.
         :type activity_id: float
         """
         self.activity_id = activity_id
-        
+
     def __repr__(self):
         return self.activity_id
-    
+
     def __str__(self):
         return f"MetaActivity with ID: {self.activity_id}"
-
 
 
 class MetaAthlete:
     """
     The lowest detail level for an athlete. Contains only the id
     """
-    
+
     def __init__(self, athlete_id=None):
         """
         :param athlete_id: Unique identifier. Renamed from Strava's API to 
@@ -460,11 +505,10 @@ class MetaAthlete:
         self.athlete_id = athlete_id
         
     def __repr__(self):
-        return self.activity_id
+        return self.athlete_id
     
     def __str__(self):
         return f"MetaAthlete with ID: {self.athlete_id}"
-
 
 
 class MetaClub:
@@ -515,10 +559,14 @@ class PhotosSummary_primary:
         :param unique_id:
         :type unique_id:
         
-        :param urls:
-        :type urls:
+        :param urls: Static urls for each of the photos posted
+        :type urls: string
         """
-    pass
+        self.photos_summary_id = photos_summary_id
+        self.source = source
+        self.unique_id = unique_id
+        self.urls = urls
+
 
 class PhotosSummary(PhotosSummary_primary):
     """
@@ -532,8 +580,10 @@ class PhotosSummary(PhotosSummary_primary):
         :param primary: An instance of PhotosSummary_primary
         :type primary: Instance of PhotosSummary_primary
         """
+        super()
         self.count = count
         self.primary = primary
+
 
 class PolylineMap:
     pass
@@ -613,7 +663,7 @@ class Zones:
 
 class BaseStream:
     """
-    The parent class for Streams.
+    The parent class for all Streams.
     Describes attributes about Stream such as size, resolution, and type
     """
 
@@ -631,13 +681,29 @@ class BaseStream:
         :type series_type: string
         """
         pass
+        self.original_size = original_size
+        self.resolution = resolution
+        self.series_type = series_type
 
 
-class AltitudeStream:
+class AltitudeStream(BaseStream):
+    """
+    An array of data that shows the altitude at each recorded point
+    """
+
+    def __init__(self, original_size=None, resolution=None, series_type=None, data=None):
+        """
+
+        :param original_size:
+        :param resolution:
+        :param series_type:
+        :param data:
+        """
+        super().__init__(original_size, resolution, series_type)
     pass
 
 
-class CadenceStream:
+class CadenceStream(BaseStream):
     pass
 
 
@@ -653,31 +719,31 @@ class DetailedSegmentEffort:
     pass
 
 
-class DistanceStream:
+class DistanceStream(BaseStream):
     pass
 
 
-class HeartrateStream:
+class HeartrateStream(BaseStream):
     pass
 
 
-class LatLngStream:
+class LatLngStream(BaseStream):
     pass
 
 
-class MovingStream:
+class MovingStream(BaseStream):
     pass
 
 
-class PowerStream:
+class PowerStream(BaseStream):
     pass
 
 
-class SmoothGradeStream:
+class SmoothGradeStream(BaseStream):
     pass
 
 
-class SmoothVelocityStream:
+class SmoothVelocityStream(BaseStream):
     pass
 
 
@@ -693,11 +759,11 @@ class SummaryClub:
     pass
 
 
-class TemperatureStream:
+class TemperatureStream(BaseStream):
     pass
 
 
-class TimeStream:
+class TimeStream(BaseStream):
     pass
 
 
