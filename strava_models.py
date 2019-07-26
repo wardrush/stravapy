@@ -79,12 +79,14 @@ class ActivityStats:
         self.all_ride_totals = all_ride_totals
         self.all_run_totals = all_run_totals
         self.all_swim_totals = all_swim_totals
+        
 
 
 class ActivityTotals:
     """
     A roll-up of metric pertaining to a set of activities. 
     Values are in seconds and meters
+    Subclassed by SummaryActivity
     """
 
     def __init__(
@@ -471,76 +473,7 @@ class Lap:
 
 
 
-class MetaActivity:
-    """
-    The lowest detail level for an activity. Contains only the id
-    """
 
-    def __init__(self, activity_id=None):
-        """
-        :param activity_id: Unique identifier. Renamed from Strava's API to
-                            avoid keyword collisions.
-        :type activity_id: float
-        """
-        self.activity_id = activity_id
-
-    def __repr__(self):
-        return self.activity_id
-
-    def __str__(self):
-        return f"MetaActivity with ID: {self.activity_id}"
-
-
-class MetaAthlete:
-    """
-    The lowest detail level for an athlete. Contains only the id
-    """
-
-    def __init__(self, athlete_id=None):
-        """
-        :param athlete_id: Unique identifier. Renamed from Strava's API to 
-                            avoid keyword collisions.
-        :type athlete_id: float
-        """
-        self.athlete_id = athlete_id
-        
-    def __repr__(self):
-        return self.athlete_id
-    
-    def __str__(self):
-        return f"MetaAthlete with ID: {self.athlete_id}"
-
-
-class MetaClub:
-    """
-    The lowest detail level for a club. Contains id, resource_state, and name
-    """
-    
-    def __init__(self, 
-                 club_id=None,
-                 resource_state=None, 
-                 name=None):
-        """
-        :param club_id: Unique identifier. Renamed from Strava's API to avoid
-                        keyword collisions.
-        :type club_id: int
-        
-        :param resource_state: Indicates level of detail. Will always be 1 in
-                                Meta classes
-        :type resource_state: int
-        
-        :param name: The club's name
-        :type name: string
-        """
-        self.club_id = club_id
-        self.resource_state = resource_state
-        self.name = name
-        
-    def __repr__(self):
-        return self.club_id
-    
-    def __str__(self):
-        return f"MetaClub with ID: {self.club_id} and name: {self.name}"
 
 
 class PhotosSummary_primary:
@@ -572,7 +505,7 @@ class PhotosSummary(PhotosSummary_primary):
     """
     Subclass of PhotosSummary_primary. On its own only has # of photos as attr
     """
-    def __init__(self, count=None, primary=None):
+    def __init__(self, count=None, primary=None, *args, **kwargs):
         """
         :param count: The number of photos
         :type count: int
@@ -580,7 +513,7 @@ class PhotosSummary(PhotosSummary_primary):
         :param primary: An instance of PhotosSummary_primary
         :type primary: Instance of PhotosSummary_primary
         """
-        super()
+        super().__init__(*args, **kwargs)
         self.count = count
         self.primary = primary
 
@@ -605,12 +538,7 @@ class RunningRace:
     pass
 
 
-class SegmentLeaderboard:
-    pass
 
-
-class SegmentLeaderboardEntry:
-    pass
 
 
 class Split:
@@ -621,16 +549,6 @@ class StreamSet:
     pass
 
 
-class SummaryGear:
-    pass
-
-
-class SummarySegment:
-    pass
-
-
-class SummarySegmentEffort:
-    pass
 
 
 class TimeZoneDistribution:
@@ -654,6 +572,100 @@ class ZoneRanges:
 
 
 class Zones:
+    pass
+
+class TimedZoneRange:
+    pass
+
+
+class MetaAthlete:
+    """
+    The lowest detail level for an athlete. Contains only the id
+    """
+
+    def __init__(self, athlete_id=None):
+        """
+        :param athlete_id: Unique identifier. Renamed from Strava's API to 
+                            avoid keyword collisions.
+        :type athlete_id: float
+        """
+        self.athlete_id = athlete_id
+        
+    def __repr__(self):
+        return f"MetaAthlete({self.athlete_id})"
+    
+    def __str__(self):
+        return f"MetaAthlete with ID: {self.athlete_id}"
+
+class SummaryAthlete(MetaAthlete, ActivityStats):
+    pass
+
+class DetailedAthlete(SummaryAthlete):
+    pass
+
+class MetaClub:
+    """
+    The lowest detail level for a club. Contains id, resource_state, and name
+    """
+    
+    def __init__(self, 
+                 club_id=None,
+                 name=None,
+                 resource_state=1):
+        """
+        :param club_id: Unique identifier. Renamed from Strava's API to avoid
+                        keyword collisions.
+        :type club_id: int
+        
+        :param resource_state: Indicates level of detail. Will always be 1 in
+                                Meta classes
+        :type resource_state: int
+        
+        :param name: The club's name
+        :type name: string
+        """
+        self.club_id = club_id
+        self.resource_state = resource_state
+        self.name = name
+        
+    def __repr__(self):
+        return f"MetaClub({self.club_id}, {self.name})"
+    
+    def __str__(self):
+        return f"MetaClub with ID: {self.club_id} and name: {self.name}"
+
+class SummaryClub(MetaClub):
+    pass
+
+class DetailedClub(SummaryClub):
+    pass
+
+
+class SummaryGear:
+    pass
+
+
+class DetailedGear(SummaryGear):
+    pass
+
+
+class SummarySegment:
+    pass
+
+class DetailedSegment(SummarySegment):
+    pass
+
+
+class SummarySegmentEffort:
+    pass
+
+class DetailedSegmentEffort(SummarySegmentEffort):
+    pass
+
+class SegmentLeaderboard(SummarySegment):
+    pass
+
+class SegmentLeaderboardEntry(SummarySegment, MetaAthlete):
     pass
 
 
@@ -684,6 +696,10 @@ class BaseStream:
         self.original_size = original_size
         self.resolution = resolution
         self.series_type = series_type
+        
+    def __repr__(self):
+        # There is no reasonable way to represent the data
+       return f"{self.__class__.__name__}(original_size={self.original_size}, resolution='{self.resolution}', series_type='{self.series_type}')"
 
 
 class AltitudeStream(BaseStream):
@@ -691,93 +707,170 @@ class AltitudeStream(BaseStream):
     An array of data that shows the altitude at each recorded point
     """
 
-    def __init__(self, original_size=None, resolution=None, series_type=None, data=None):
+    def __init__(self, data=None, *args, **kwargs):
         """
-
-        :param original_size:
-        :param resolution:
-        :param series_type:
-        :param data:
+        Look to BaseStream docs for other parameters
+        
+        :param data: The data recorded at each point
+        :type data: list
         """
-        super().__init__(original_size, resolution, series_type)
-    pass
-
+        super().__init__(*args, **kwargs)
+        self.data = data
+        
+    def __repr__(self):
+        return super().__repr__()
+        
+    
 
 class CadenceStream(BaseStream):
-    pass
-
-
-class DetailedGear:
-    pass
-
-
-class DetailedSegment:
-    pass
-
-
-class DetailedSegmentEffort:
-    pass
+    """
+    An array of data that shows the pedal cadence at each recorded point
+    """
+    
+    def __init__(self, data=None, *args, **kwargs):
+        """
+        Look to BaseStream docs for other parameters
+        
+        :param data: The data recorded at each point
+        :type data: list
+        """
+        super().__init__(*args, **kwargs)
+        self.data = data
+        
+    def __repr__(self):
+        return super().__repr__()
 
 
 class DistanceStream(BaseStream):
-    pass
+    def __init__(self, data=None, *args, **kwargs):
+        """
+        Look to BaseStream docs for other parameters
+        
+        :param data: The data recorded at each point
+        :type data: list
+        """
+        super().__init__(*args, **kwargs)
+        self.data = data
+        
+    def __repr__(self):
+        return super().__repr__()
 
 
 class HeartrateStream(BaseStream):
-    pass
-
+    def __init__(self, data=None, *args, **kwargs):
+        """
+        Look to BaseStream docs for other parameters
+        
+        :param data: The data recorded at each point
+        :type data: list
+        """
+        super().__init__(*args, **kwargs)
+        self.data = data
+        
+    def __repr__(self):
+        return super().__repr__()
 
 class LatLngStream(BaseStream):
-    pass
+    def __init__(self, data=None, *args, **kwargs):
+        """
+        Look to BaseStream docs for other parameters
+        
+        :param data: The data recorded at each point
+        :type data: list
+        """
+        super().__init__(*args, **kwargs)
+        self.data = data
+        
+    def __repr__(self):
+        return super().__repr__()
 
 
 class MovingStream(BaseStream):
-    pass
+    def __init__(self, data=None, *args, **kwargs):
+        """
+        Look to BaseStream docs for other parameters
+        
+        :param data: The data recorded at each point
+        :type data: list
+        """
+        super().__init__(*args, **kwargs)
+        self.data = data
+        
+    def __repr__(self):
+        return super().__repr__()
 
 
 class PowerStream(BaseStream):
-    pass
+    def __init__(self, data=None, *args, **kwargs):
+        """
+        Look to BaseStream docs for other parameters
+        
+        :param data: The data recorded at each point
+        :type data: list
+        """
+        super().__init__(*args, **kwargs)
+        self.data = data
+        
+    def __repr__(self):
+        return super().__repr__()
 
 
 class SmoothGradeStream(BaseStream):
-    pass
+    def __init__(self, data=None, *args, **kwargs):
+        """
+        Look to BaseStream docs for other parameters
+        
+        :param data: The data recorded at each point
+        :type data: list
+        """
+        super().__init__(*args, **kwargs)
+        self.data = data
+        
+    def __repr__(self):
+        return super().__repr__()
 
 
 class SmoothVelocityStream(BaseStream):
-    pass
+    def __init__(self, data=None, *args, **kwargs):
+        """
+        Look to BaseStream docs for other parameters
+        
+        :param data: The data recorded at each point
+        :type data: list
+        """
+        super().__init__(*args, **kwargs)
+        self.data = data
+        
+    def __repr__(self):
+        return super().__repr__()
 
 
-class SummaryActivity:
-    pass
-
-
-class SummaryAthlete:
-    pass
-
-
-class SummaryClub:
-    pass
 
 
 class TemperatureStream(BaseStream):
-    pass
-
+    def __init__(self, data=None, *args, **kwargs):
+        """
+        Look to BaseStream docs for other parameters
+        
+        :param data: The data recorded at each point
+        :type data: list
+        """
+        super().__init__(*args, **kwargs)
+        self.data = data
+        
+    def __repr__(self):
+        return super().__repr__()
 
 class TimeStream(BaseStream):
-    pass
-
-
-class TimedZoneRange:
-    pass
-
-
-class DetailedActivty:
-    pass
-
-
-class DetailedAthlete:
-    pass
-
-
-class DetailedClub:
-    pass
+    def __init__(self, data=None, *args, **kwargs):
+        """
+        Look to BaseStream docs for other parameters
+        
+        :param data: The data recorded at each point
+        :type data: list
+        """
+        super().__init__(*args, **kwargs)
+        self.data = data
+        
+    def __repr__(self):
+        return super().__repr__()
