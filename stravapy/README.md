@@ -1,7 +1,5 @@
 # stravapy
-### [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 #### Version 0.1
-
 A tool to interact with [Strava API v3](https://developers.strava.com/) without requiring an existing web framework
 
 ## Installation
@@ -19,26 +17,3 @@ The Strava authentication process generally works as follows:
 4. TODO figure out exactly what this workflow is going to look like
 
 ## Project Structure
-```
-stravapy
-│   README.md
-|   Strava API Functions and Models.txt
-|   stravaAPI_comments.txt
-│
-└───models
-│      activity.py
-│      athlete.py
-|      club.py
-|      gear.py
-|      segment.py
-|      stream.py
-|      utils.py
-│      zone.py
-│   
-└───oauth
-    |   utils.py
-    │  
-    |___templates
-           success.html
-           fail.html
-```
