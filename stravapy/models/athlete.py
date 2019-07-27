@@ -4,7 +4,7 @@ Created on Fri Jul 26 11:02:02 2019
 
 @author: wrush049
 """
-from strava_models import ActivityStats
+
 
 class MetaAthlete:
     """
@@ -25,11 +25,14 @@ class MetaAthlete:
     def __str__(self):
         return f"MetaAthlete with ID: {self.athlete_id}"
 
+
 class SummaryAthlete(MetaAthlete, ActivityStats):
     pass
 
+
 class DetailedAthlete(SummaryAthlete):
     pass
+
 
 class ActivityStats:
     """

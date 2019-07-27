@@ -4,7 +4,7 @@ Created on Fri Jul 26 13:08:30 2019
 
 @author: wrush049
 """
-from athlete import MetaAthlete
+from models.athlete import MetaAthlete
 
 class PolylineMap:
     pass
@@ -21,6 +21,7 @@ class RouteDirection:
 class SummarySegment:
     pass
 
+
 class DetailedSegment(SummarySegment):
     pass
 
@@ -28,11 +29,14 @@ class DetailedSegment(SummarySegment):
 class SummarySegmentEffort:
     pass
 
+
 class DetailedSegmentEffort(SummarySegmentEffort):
     pass
 
+
 class SegmentLeaderboard(SummarySegment):
     pass
+
 
 class SegmentLeaderboardEntry(SummarySegment, MetaAthlete):
     pass

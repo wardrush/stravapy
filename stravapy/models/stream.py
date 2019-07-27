@@ -1,6 +1,4 @@
-############
-# Stream models
-###########
+
 
 class BaseStream:
     """
@@ -53,7 +51,6 @@ class AltitudeStream(BaseStream):
     def __repr__(self):
         return super().__repr__()
         
-    
 
 class CadenceStream(BaseStream):
     """
@@ -102,6 +99,7 @@ class HeartrateStream(BaseStream):
         
     def __repr__(self):
         return super().__repr__()
+
 
 class LatLngStream(BaseStream):
     def __init__(self, data=None, *args, **kwargs):
@@ -178,8 +176,6 @@ class SmoothVelocityStream(BaseStream):
         return super().__repr__()
 
 
-
-
 class TemperatureStream(BaseStream):
     def __init__(self, data=None, *args, **kwargs):
         """
@@ -193,6 +189,7 @@ class TemperatureStream(BaseStream):
         
     def __repr__(self):
         return super().__repr__()
+
 
 class TimeStream(BaseStream):
     def __init__(self, data=None, *args, **kwargs):

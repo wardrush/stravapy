@@ -14,7 +14,8 @@ class LatLng:
 
     def __repr__(self):
         return f"LatLng({self.lat}, {self.long})"
-    
+
+
 class Error:
     """
     The error returned by Strava's API
@@ -34,6 +35,7 @@ class Error:
         self.code = code
         self.field = field
         self.resource = resource
+
 
 class PhotosSummary_primary:
     """
@@ -77,7 +79,6 @@ class PhotosSummary(PhotosSummary_primary):
         self.primary = primary
 
 
-
 class Fault:
     """
     Encapsulates the Errors returned from API
@@ -93,7 +94,8 @@ class Fault:
         """
         self.errors = errors
         self.message = message
-        
+
+
 class UpdateableActivity:
     pass
 

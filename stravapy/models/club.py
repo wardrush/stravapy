@@ -5,6 +5,7 @@ Created on Fri Jul 26 13:07:38 2019
 @author: wrush049
 """
 
+
 class MetaClub:
     """
     The lowest detail level for a club. Contains id, resource_state, and name
@@ -36,8 +37,10 @@ class MetaClub:
     def __str__(self):
         return f"MetaClub with ID: {self.club_id} and name: {self.name}"
 
+
 class SummaryClub(MetaClub):
     pass
+
 
 class DetailedClub(SummaryClub):
     pass

@@ -80,6 +80,7 @@ class OAuth2Client:
         self.token_dict = token_dict
         self.access_token = access_token
         self.user_auth_url = user_auth_url
+        self.token_code = token_code
 
     def authenticate_user(self, host="", port=8080, handler=AuthServerRequestHandler):
         """

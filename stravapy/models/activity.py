@@ -1,5 +1,53 @@
+class ActivityTotals:
+    """
+    A roll-up of metric pertaining to a set of activities.
+    Values are in seconds and meters
+    """
+
+    def __init__(
+            self,
+            count=None,
+            distance=None,
+            moving_time=None,
+            elapsed_time=None,
+            elevation_gain=None,
+            achievement_count=None,
+    ):
+        """
+        Instatiates an ActivityTotals object
+
+        :param count:
+        :type count:
+
+        :param distance:
+        :type distance:
+
+        :param moving_time:
+        :type moving_time:
+
+        :param elapsed_time:
+        :type elapsed_time:
+
+        :param elevation_gain:
+        :type elevation_gain:
+
+        :param achievement_count:
+        :type achievement_count:
+        """
+        self.count = count
+        self.distance = distance
+        self.moving_time = moving_time
+        self.elapsed_time = elapsed_time
+        self.elevation_gain = elevation_gain
+        self.achievement_count = achievement_count
+
+
 class Split:
+
+    def __init__(self, split):
+        self.split = split
     pass
+
 
 class Lap(Split):
     """
@@ -101,10 +149,11 @@ class Lap(Split):
         self.moving_time = moving_time
         self.name = name
         self.pace_zone = pace_zone
-        self.split = split
         self.start_date = start_date
         self.start_date_local = start_date_local
         self.total_elevation_gain = total_elevation_gain
+        super().__init__(split)
+
 
 class MetaActivity:
     """
@@ -125,14 +174,16 @@ class MetaActivity:
     def __str__(self):
         return f"MetaActivity with ID: {self.activity_id}"
 
+
 class SummaryActivity(MetaActivity, ActivityTotals):
     #TODO See if info can be copy-pasted from ActivityTotals
-    def __init__(self):
-        pass
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
 
 class DetailedActivty(SummaryActivity):
     pass
+
 
 class Comment:
     """
@@ -169,49 +220,6 @@ class Comment:
         self.text = text
         self.athlete = athlete
         self.created_at = created_at
-        
-class ActivityTotals:
-    """
-    A roll-up of metric pertaining to a set of activities. 
-    Values are in seconds and meters
-    """
-
-    def __init__(
-        self,
-        count=None,
-        distance=None,
-        moving_time=None,
-        elapsed_time=None,
-        elevation_gain=None,
-        achievement_count=None,
-    ):
-        """
-        Instatiates an ActivityTotals object
-    
-        :param count:
-        :type count:
-            
-        :param distance:
-        :type distance:
-            
-        :param moving_time:
-        :type moving_time:
-            
-        :param elapsed_time:
-        :type elapsed_time:
-            
-        :param elevation_gain:
-        :type elevation_gain:
-            
-        :param achievement_count:
-        :type achievement_count:
-        """
-        self.count = count
-        self.distance = distance
-        self.moving_time = moving_time
-        self.elapsed_time = elapsed_time
-        self.elevation_gain = elevation_gain
-        self.achievement_count = achievement_count
 
 
 # TODO decide if this should just be made as an attr in activity class
@@ -277,6 +285,7 @@ class ActivityZone:
         self.points = points
         self.custom_zones = custom_zones
         self.zone_max = zone_max
-        
+
+
 class RunningRace:
     pass
